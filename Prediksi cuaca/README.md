@@ -169,7 +169,7 @@ Setelah proses pembersihan dan persiapan data selesai, langkah selanjutnya adala
        - Gradient Boosting: Menggabungkan model secara bertahap untuk mengurangi kesalahan. Kelebihan: presisi tinggi. Kekurangan: lambat dan bisa overfitting.
        - SVM: Mencari hyperplane terbaik untuk memisahkan kelas. Kelebihan: efektif di dimensi tinggi. Kekurangan: mahal secara komputasi.
 
-4. Pemilihan Model Terbaik:
+5. Pemilihan Model Terbaik:
   <br> - Jika hanya satu model digunakan, proses improvement seperti grid search dilakukan untuk tuning hyperparameter.
        - Karena lebih dari satu model digunakan, maka dilakukan perbandingan metrik dan dipilih model terbaik.
 
