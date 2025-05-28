@@ -243,17 +243,20 @@ $$
      - Precision dan Recall menunjukkan model ini cukup seimbang, tapi masih ada 43 kesalahan klasifikasi (FP + FN), yang paling banyak di antara keempat model.
      - Confusion matrix memperlihatkan jumlah False Negatives (FN) yang cukup tinggi (27), artinya model ini lebih sering gagal mendeteksi kondisi cuaca positif yang sebenarnya ada.
      - Insight: KNN kurang optimal untuk dataset ini, terutama karena model berbasis jarak ini sensitif terhadap noise dan outlier, serta cenderung lambat dan kurang akurat di dataset besar.
+  <br>   
      **Random Forest**
      - Memiliki akurasi tertinggi (99.35%) dan precision terbaik (99.49%), menunjukkan model ini sangat tepat dalam memprediksi kondisi positif.
      - Recall (98%) juga sangat tinggi, yang berarti model ini mampu mendeteksi sebagian besar data positif.
      - Dengan hanya 15 kesalahan total, Random Forest adalah yang paling akurat dan paling sedikit salah klasifikasi.
      - Confusion matrix menunjukkan false positive (FP) sangat kecil (3), yang berarti model ini sangat jarang memprediksi positif secara keliru.
      - Insight: Random Forest sangat kuat untuk dataset ini karena mampu menangani fitur kompleks dan noise dengan baik, serta menghasilkan prediksi yang sangat andal.
+  <br>
      **Gradient Boosting**
      - Performa mendekati Random Forest dengan akurasi 99.05% dan precision 98.98%.
      - Recall sedikit lebih rendah (97.34%) dan jumlah kesalahan total 22.
      - Memiliki false positive (6) dan false negative (16) yang lebih banyak dibanding Random Forest dan SVM.
      - Insight: Gradient Boosting memberikan prediksi yang kuat dan presisi tinggi, namun relatif lebih rentan terhadap kesalahan dibanding Random Forest, mungkin karena model ini cenderung overfitting jika tuning tidak optimal.
+  <br>
      **SVM (Support Vector Machine)**
      - Akurasi tinggi (99.27%) dan recall terbaik (98.84%), menunjukkan SVM sangat efektif mengenali kelas positif.
      - False negative paling sedikit (7), sangat bagus untuk kasus di mana melewatkan data positif sangat berisiko.
