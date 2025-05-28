@@ -153,25 +153,30 @@ X_test_scaled[numerical_cols] = scaler.transform(X_test[numerical_cols])
 
 Setelah proses pembersihan dan persiapan data selesai, langkah selanjutnya adalah membangun model machine learning untuk memprediksi jenis cuaca berdasarkan berbagai parameter lingkungan. Proses pemodelan ini mencakup tahapan sebagai berikut:
 
-1. Inisialisasi Model:
-  <br> - KNeighborsClassifier() untuk KNN
-       - RandomForestClassifier(random_state=42) untuk Random Forest
-       - GradientBoostingClassifier(random_state=42) untuk Gradient Boosting
-       - SVC(probability=True, class_weight='balanced', random_state=42) untuk SVM
+1. **Inisialisasi Model:**
+   - `KNeighborsClassifier()` untuk KNN  
+   - `RandomForestClassifier(random_state=42)` untuk Random Forest  
+   - `GradientBoostingClassifier(random_state=42)` untuk Gradient Boosting  
+   - `SVC(probability=True, class_weight='balanced', random_state=42)` untuk SVM
 
-2. Pelatihan Model:
-  <br> - Model KNN dan SVM dilatih menggunakan data yang telah di-scaling (X_train_scaled) karena sensitif terhadap skala fitur.
-       - Model Random Forest dan Gradient Boosting dilatih menggunakan data asli (X_train) karena algoritma berbasis pohon tidak memerlukan scaling.
+2. **Pelatihan Model:**
+   - Model KNN dan SVM dilatih menggunakan data yang telah di-scaling (`X_train_scaled`) karena sensitif terhadap skala fitur.  
+   - Model Random Forest dan Gradient Boosting dilatih menggunakan data asli (`X_train`) karena algoritma berbasis pohon tidak memerlukan scaling.
 
-3. Cara Kerja Singkat Tiap Model:
-  <br> - KNN: Mengklasifikasikan berdasarkan mayoritas tetangga terdekat. Kelebihan: sederhana. Kekurangan: lambat di data besar.
-       - Random Forest: Ensembel dari banyak decision tree. Kelebihan: akurat, tahan outlier. Kekurangan: interpretasi kompleks.
-       - Gradient Boosting: Menggabungkan model secara bertahap untuk mengurangi kesalahan. Kelebihan: presisi tinggi. Kekurangan: lambat dan bisa overfitting.
-       - SVM: Mencari hyperplane terbaik untuk memisahkan kelas. Kelebihan: efektif di dimensi tinggi. Kekurangan: mahal secara komputasi.
+3. **Cara Kerja Singkat Tiap Model:**
+   - **KNN:** Mengklasifikasikan berdasarkan mayoritas tetangga terdekat.  
+     Kelebihan: sederhana. Kekurangan: lambat di data besar.  
+   - **Random Forest:** Ensembel dari banyak decision tree.  
+     Kelebihan: akurat, tahan outlier. Kekurangan: interpretasi kompleks.  
+   - **Gradient Boosting:** Menggabungkan model secara bertahap untuk mengurangi kesalahan.  
+     Kelebihan: presisi tinggi. Kekurangan: lambat dan bisa overfitting.  
+   - **SVM:** Mencari hyperplane terbaik untuk memisahkan kelas.  
+     Kelebihan: efektif di dimensi tinggi. Kekurangan: mahal secara komputasi.
 
-5. Pemilihan Model Terbaik:
-  <br> - Jika hanya satu model digunakan, proses improvement seperti grid search dilakukan untuk tuning hyperparameter.
-       - Karena lebih dari satu model digunakan, maka dilakukan perbandingan metrik dan dipilih model terbaik.
+4. **Pemilihan Model Terbaik:**
+   - Jika hanya satu model digunakan, proses improvement seperti grid search dilakukan untuk tuning hyperparameter.  
+   - Karena lebih dari satu model digunakan, maka dilakukan perbandingan metrik dan dipilih model terbaik.
+
 
 
 ## Evaluation
@@ -239,32 +244,33 @@ $$
 | Gradient Boost | 585     | 1711 | 6  | 16    | 22          |
 | SVM            | **594** | 1707 | 10 | **7** | 17          |
 
-Analisis:
+## Analisis Model
 
-  **KNN**
-  <br> - Akurasi sudah sangat baik (98.14%), namun relatif paling rendah dibanding model lain.
-       - Precision dan Recall menunjukkan model ini cukup seimbang, tapi masih ada 43 kesalahan klasifikasi (FP + FN), yang paling banyak di antara keempat model.
-       - Confusion matrix memperlihatkan jumlah False Negatives (FN) yang cukup tinggi (27), artinya model ini lebih sering gagal mendeteksi kondisi cuaca positif yang sebenarnya ada.
-       - Insight: KNN kurang optimal untuk dataset ini, terutama karena model berbasis jarak ini sensitif terhadap noise dan outlier, serta cenderung lambat dan kurang akurat di dataset besar.
+### **KNN**
+- Akurasi sudah sangat baik (**98.14%**), namun paling rendah dibanding model lain.
+- Precision dan Recall menunjukkan model ini cukup seimbang, tetapi terdapat **43 kesalahan klasifikasi** (FP + FN), paling banyak di antara semua model.
+- Confusion matrix menunjukkan **False Negatives (FN)** cukup tinggi (**27**), artinya model sering gagal mendeteksi kondisi cuaca positif yang sebenarnya ada.
+- **Insight**: KNN kurang optimal untuk dataset ini karena sensitif terhadap noise dan outlier, serta kurang akurat pada dataset besar.
 
-  **Random Forest**
-  <br> - Memiliki akurasi tertinggi (99.35%) dan precision terbaik (99.49%), menunjukkan model ini sangat tepat dalam memprediksi kondisi positif.
-       - Recall (98%) juga sangat tinggi, yang berarti model ini mampu mendeteksi sebagian besar data positif.
-       - Dengan hanya 15 kesalahan total, Random Forest adalah yang paling akurat dan paling sedikit salah klasifikasi.
-       - Confusion matrix menunjukkan false positive (FP) sangat kecil (3), yang berarti model ini sangat jarang memprediksi positif secara keliru.
-       - Insight: Random Forest sangat kuat untuk dataset ini karena mampu menangani fitur kompleks dan noise dengan baik, serta menghasilkan prediksi yang sangat andal.
-       
-  **Gradient Boosting**
-   <br> - Performa mendekati Random Forest dengan akurasi 99.05% dan precision 98.98%.
-        - Recall sedikit lebih rendah (97.34%) dan jumlah kesalahan total 22.
-        - Memiliki false positive (6) dan false negative (16) yang lebih banyak dibanding Random Forest dan SVM.
-        - Insight: Gradient Boosting memberikan prediksi yang kuat dan presisi tinggi, namun relatif lebih rentan terhadap kesalahan dibanding Random Forest, mungkin karena model ini cenderung overfitting jika tuning tidak optimal.
+### **Random Forest**
+- Akurasi tertinggi (**99.35%**) dan precision terbaik (**99.49%**).
+- Recall tinggi (**98%**) menunjukkan model mampu mendeteksi sebagian besar data positif.
+- Hanya terdapat **15 kesalahan total**, menjadikannya model paling akurat dan andal.
+- Confusion matrix menunjukkan **False Positive (FP)** sangat kecil (**3**).
+- **Insight**: Random Forest sangat efektif untuk dataset ini, mampu menangani fitur kompleks dan noise dengan baik.
 
-  **SVM (Support Vector Machine)**
-   <br> - Akurasi tinggi (99.27%) dan recall terbaik (98.84%), menunjukkan SVM sangat efektif mengenali kelas positif.
-        - False negative paling sedikit (7), sangat bagus untuk kasus di mana melewatkan data positif sangat berisiko.
-        - Namun, false positive sedikit lebih tinggi (10) dibanding Random Forest, sehingga model ini sedikit lebih sering memprediksi positif secara salah.
-        - Insight: SVM sangat cocok jika fokus utama adalah meminimalkan false negative (misal, deteksi cuaca ekstrem atau risiko tinggi). Namun, perlu diwaspadai potensi false alarm yang sedikit lebih tinggi.
+### **Gradient Boosting**
+- Performa mendekati Random Forest: akurasi (**99.05%**) dan precision (**98.98%**).
+- Recall sedikit lebih rendah (**97.34%**), dengan **22 kesalahan total**.
+- Terdapat **6 FP** dan **16 FN**, lebih banyak dibanding Random Forest dan SVM.
+- **Insight**: Gradient Boosting kuat dan presisi tinggi, tetapi sedikit lebih rentan terhadap kesalahan jika tuning tidak optimal.
+
+### **SVM (Support Vector Machine)**
+- Akurasi tinggi (**99.27%**) dan **recall terbaik** (**98.84%**).
+- **False Negative paling sedikit (7)**, sangat baik untuk kasus penting seperti deteksi cuaca ekstrem.
+- **False Positive (10)** sedikit lebih tinggi dibanding Random Forest.
+- **Insight**: SVM cocok jika fokus utama adalah meminimalkan FN, meskipun berpotensi menghasilkan false alarm sedikit lebih banyak.
+
         
 ###  Kesimpulan
 
