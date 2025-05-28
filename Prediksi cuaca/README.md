@@ -213,10 +213,13 @@ $$
 5. ROC-AUC  yaitu Mengukur trade-off antara True Positive Rate dan False Positive Rate. Nilai mendekati 1 menunjukkan performa yang sangat baik.
   
 ## Alasan Pemilihan Metrik
-  <br> Metrik ini dipilih karena klasifikasi pada dataset ini berpotensi mengalami ketidakseimbangan antar kelas.
-      1. Accuracy memberikan gambaran umum kinerja model.
-      2. Precision dan Recall digunakan untuk melihat secara lebih detail bagaimana model menangani data positif dan negatif secara seimbang.
-      3. F1-score membantu saat perlu keseimbangan antara kesalahan tipe I (false positive) dan tipe II (false negative).
+  Metrik ini dipilih karena klasifikasi pada dataset ini berpotensi mengalami ketidakseimbangan antar kelas.
+  
+  1. Accuracy memberikan gambaran umum kinerja model.
+  
+  2. Precision dan Recall digunakan untuk melihat secara lebih detail bagaimana model menangani data positif dan negatif secara seimbang.
+  
+  3. F1-score membantu saat perlu keseimbangan antara kesalahan tipe I (false positive) dan tipe II (false negative).
 
   
 ### Hasil Evaluasi Model
