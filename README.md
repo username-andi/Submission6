@@ -104,7 +104,7 @@ Langkah ini memastikan bahwa model tidak dilatih dengan data ekstrim yang dapat 
     - Tidak terdapat nilai kosong.
 
 2. Histograms for numerical features
-   <br>![Numerical](img/Histograms_numerical_features.png/)
+   <br>![Numerical](img/Histograms_numerical_features.png)
    <br> Berdasarkan histogram tersebut, dapat diambil info bahwa dalam Humidity agak codong ke kanan dengan persebaran data antara 60% - 90% menandakan kelembaban yang tinggi.
    Dari Precipitation dilihat distribusi multimodal dan tidak merata, yang awalnya tidak ada hujan tiba-tiba melonjak dengan level tinggi. Kemudian dari Visibility terdapat pola bimodal yang cukup jelas, dapat digunakan unutk mendeteksi cuaca buruk. Dari cerminan ketiga data tersebut dapat diambil kesimpulan kemungkinan variabel tersebut sangat penting untuk klasifikasi cuaca. 
 
